@@ -1,9 +1,28 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js'
+    // print: './src/print.js'
+  },
+  devtool: 'inline-source-map', // 可以定位错误到具体的源文件
+  devServer: {
+    contentBase: './dist',
+    hot: true // 模块热更新
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']), // 每次清理dist文件夹
+    new HtmlWebpackPlugin({ // 每次重新在dist下生成index.html
+      title: '起步'
+    }),
+    new webpack.NamedModulesPlugin(), // 模块热更新
+    new webpack.HotModuleReplacementPlugin() // 模块热更新
+  ],
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
