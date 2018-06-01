@@ -9,7 +9,7 @@ module.exports = {
     // print: './src/print.js'
   },
   devtool: 'inline-source-map', // 可以定位错误到具体的源文件
-  devServer: {
+  devServer: { // webpack-dev-server live-reload功能
     contentBase: './dist',
     hot: true // 模块热更新
   },
@@ -18,7 +18,7 @@ module.exports = {
     new HtmlWebpackPlugin({ // 每次重新在dist下生成index.html
       title: '起步'
     }),
-    new webpack.NamedModulesPlugin(), // 模块热更新
+    new webpack.NamedModulesPlugin(), // 以便更容易查看要修补(patch)的依赖
     new webpack.HotModuleReplacementPlugin() // 模块热更新
   ],
   output: {
